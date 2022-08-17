@@ -8,3 +8,5 @@ img_path = join('data','img_input.jpg')
 img = Image.open(img_path)
 IMG_RES = img.size #resolution of input image
 print(f"the image resolution is : {IMG_RES}")
+
+names_layers = ['mixed3', 'mixed5']
