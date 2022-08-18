@@ -19,6 +19,8 @@ class DeepDream():
 		print("The model summary is : \n")
 		print(self.model.summary())
 
+	def set_img(self,new_image):
+		self.img = new_image
 
 	def calc_loss(self,img, model):
 		# Pass forward the image through the model to retrieve the activations.
