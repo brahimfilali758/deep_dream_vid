@@ -1,6 +1,7 @@
 import tensorflow as tf
 from utils import build_model, load_image, preprocess,deprocess,save_img
 import numpy as np
+from config import *
 
 class DeepDream():
 	def __init__(self,model, img=None,steps=None,step_size=None):
@@ -10,7 +11,7 @@ class DeepDream():
 			self.img = load_image()
 		else : self.img = img
 		if not steps :
-			self.steps = 100
+			self.steps = STEPS
 		else : self.steps = steps
 		if not step_size :
 			self.step_size = 0.01
@@ -45,7 +46,7 @@ class DeepDream():
 				# `GradientTape` only watches `tf.Variable`s by default
 				tape.watch(img)
 				loss = self.calc_loss(img, self.model)
-			print(f"loss calculated succefully, loss = {loss}")	
+			# print(f"loss calculated succefully, loss = {loss}")	
 			# Calculate the gradient of the loss with respect to the pixels of the input image.
 			gradients = tape.gradient(loss, img)
 
@@ -56,7 +57,7 @@ class DeepDream():
 			# You can update the image by directly adding the gradients (because they're the same shape!)
 			img = img + gradients*self.step_size
 			img = tf.clip_by_value(img, -1, 1)
-			print(f"Done with step num : {n}")	
+			# print(f"Done with step num : {n}")	
 		return loss, img
 
 	def __call__(self) :
